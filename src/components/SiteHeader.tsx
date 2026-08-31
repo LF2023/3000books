@@ -16,6 +16,9 @@ export function SiteHeader() {
           className="font-serif text-lg tracking-[0.18em] text-ink no-underline"
         >
           叁仟书屋
+          <span className="ml-3 font-sans text-xs tracking-[0.1em] text-ink-soft">
+            3000本书籍 · 3000座书屋 · 3000个故事
+          </span>
         </Link>
         <nav aria-label="主导航" className="flex gap-5 font-sans text-sm text-ink-soft">
           {nav.map((item) => (

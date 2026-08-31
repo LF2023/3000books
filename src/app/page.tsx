@@ -36,9 +36,7 @@ export default function HomePage() {
         <p className="max-w-xl text-lg leading-loose text-ink-soft">
           一个安静的非营利文化计划，昵称「3000本书」。
         </p>
-        <p className="text-base leading-loose tracking-[0.1em] text-ink">
-          3000本书籍，3000座书屋，3000个故事。
-        </p>
+
       </header>
 
       <section className="max-w-xl space-y-5 text-[1.05rem] leading-[2] text-ink">
