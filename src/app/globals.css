@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f4efe6;
+  --paper-deep: #ebe4d6;
+  --ink: #1f1b16;
+  --ink-soft: #5c554c;
+  --rule: #d4cbb8;
+  --seal: #7a2e2e;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-rule: var(--rule);
+  --color-seal: var(--seal);
+  --font-serif: "Songti SC", "Noto Serif SC", "STSong", "SimSun", "Songti", serif;
+  --font-sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #e6d7b8;
+  color: var(--ink);
+}
+
+a {
+  text-underline-offset: 0.22em;
+}
+
+a:hover {
+  color: var(--seal);
+}
