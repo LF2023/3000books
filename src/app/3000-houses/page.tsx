@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SubmissionForm } from "@/components/SubmissionForm";
 
 export const metadata: Metadata = {
   title: "3000座书屋",
@@ -25,6 +26,31 @@ export default function ThreeThousandHousesPage() {
           当第一座书屋真正立起来，它会连同地址与来历一起，写在这一页。在那之前，这里保留空白。
         </p>
       </div>
+      <section aria-labelledby="submit-heading" className="max-w-xl space-y-6 border-t border-rule pt-10">
+        <h2 id="submit-heading" className="text-xl tracking-[0.12em]">提供一处书屋线索</h2>
+        <SubmissionForm
+          subject="书屋线索"
+          submitLabel="提交线索"
+          fields={[
+            { name: "country", label: "国家", required: true },
+            { name: "place", label: "地点", required: true, placeholder: "城市 / 街区" },
+            {
+              name: "kind",
+              label: "书屋类型",
+              type: "select",
+              options: ["图书馆", "书店", "咖啡馆", "学校", "其他"],
+            },
+            {
+              name: "status",
+              label: "现状",
+              type: "select",
+              options: ["已开放", "筹备中", "只是一个想法"],
+            },
+            { name: "contact", label: "联系方式", required: true, help: "邮箱或可转达的渠道" },
+            { name: "notes", label: "补充说明", type: "textarea", placeholder: "任何值得知道的细节" },
+          ]}
+        />
+      </section>
     </article>
   );
 }

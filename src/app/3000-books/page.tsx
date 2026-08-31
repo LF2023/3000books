@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SubmissionForm } from "@/components/SubmissionForm";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -30,6 +31,27 @@ export default function ThreeThousandBooksPage() {
           书目只作整理与指引。本站不提供全文下载，公版状态亦未逐本核验，这些诚实的保留，是清单的一部分。
         </p>
       </div>
+      <section aria-labelledby="submit-heading" className="max-w-xl space-y-6 border-t border-rule pt-10">
+        <h2 id="submit-heading" className="text-xl tracking-[0.12em]">推荐一本书</h2>
+        <SubmissionForm
+          subject="书籍推荐"
+          submitLabel="推荐"
+          fields={[
+            { name: "title", label: "书名", required: true },
+            { name: "author", label: "作者", required: true },
+            { name: "year", label: "年代", placeholder: "如 1926（首版年份）" },
+            {
+              name: "reason",
+              label: "推荐理由",
+              type: "textarea",
+              required: true,
+              placeholder: "一两句话即可：它为什么值得留存",
+            },
+            { name: "caller", label: "你的称呼", help: "可选，仅用于回信" },
+            { name: "contact", label: "联系方式", help: "可选，邮箱即可" },
+          ]}
+        />
+      </section>
     </article>
   );
 }
