@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const nav = [
   { href: "/", label: "首页" },
+  { href: "/books", label: "书单" },
   { href: "/about", label: "关于" },
   { href: "/contact", label: "联络" },
 ];

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "叁仟书屋 · 3000 Books",
@@ -39,10 +40,10 @@ export default function HomePage() {
 
       <section className="max-w-xl space-y-5 text-[1.05rem] leading-[2] text-ink">
         <p>
-          叁仟书屋不急于铺开目录，也不把规模写成成绩。我们先把态度说清楚：阅读应当缓慢，保存应当郑重，公共文化应当向人敞开。
+          叁仟书屋不把规模写成成绩。我们先把态度说清楚：阅读应当缓慢，保存应当郑重，公共文化应当向人敞开。
         </p>
         <p>
-          这是一处纸与墨的站点。若你路过，欢迎读完这些句子；若你愿意写信，信会到达。
+          这是一处纸与墨的站点。目录从一百本种子开始，仍不提供全文下载。若你路过，欢迎读完这些句子；若你愿意写信，信会到达。
         </p>
       </section>
 
@@ -60,6 +61,17 @@ export default function HomePage() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="max-w-xl border-t border-rule pt-10 text-[1.02rem] leading-loose">
+        <h2 className="mb-3 text-xl tracking-[0.12em]">书单</h2>
+        <p className="text-ink-soft">
+          一百本种子已放在{" "}
+          <Link href="/books" className="text-ink underline decoration-rule">
+            书单
+          </Link>
+          。只列书目，不提供下载。
+        </p>
       </section>
 
       <section className="max-w-xl border-t border-rule pt-10 text-[1.02rem] leading-loose">

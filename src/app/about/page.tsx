@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "关于",
@@ -23,7 +24,11 @@ export default function AboutPage() {
           。
         </p>
         <p>
-          我们不把这里做成商店，也不急于公布尚未成形的书目。先写下阅读、保存与公共文化这三件事，是为了让来访者知道：这是一处与书有关的公共空间，而不是一套待售的服务。
+          我们不把这里做成商店。书目从一百本种子开始，见{" "}
+          <Link href="/books" className="underline decoration-rule">
+            书单
+          </Link>
+          ；本站不提供全文下载，公版状态也未逐本核验。
         </p>
         <p>
           纸页还薄。若你愿意等候，请把等候当作阅读的一部分。
