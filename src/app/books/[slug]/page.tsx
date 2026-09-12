@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getBookIndex, getBookMeta } from "@/lib/books";
 import { BookCover } from "@/components/BookCover";
+import { coverUrlFor } from "@/lib/books";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -38,6 +39,10 @@ export default async function BookPage({ params }: PageProps) {
   if (!meta) notFound();
 
   const rightsLabel = meta.rights.status === "public_domain" ? "公版" : "未核验";
+  const hasRealCover = Boolean(coverUrlFor(item));
+  const coverNote = hasRealCover
+    ? "页面封面来自公开书目库。"
+    : "页面书衣为站内排印生成，非原书装帧。";
 
   return (
     <article className="max-w-3xl space-y-10">
@@ -56,6 +61,7 @@ export default async function BookPage({ params }: PageProps) {
             title={meta.title}
             category={meta.category}
             author={meta.author.name}
+            coverUrl={coverUrlFor(item)}
           />
         </div>
 
@@ -94,7 +100,7 @@ export default async function BookPage({ params }: PageProps) {
           <span aria-hidden="true" className="mx-2 text-rule-strong">·</span>
           不提供全文
         </p>
-        <p>本站暂不提供全文下载。公版状态未逐本核验。页面书衣为站内排印生成，非原书装帧。</p>
+        <p>本站暂不提供全文下载。公版状态未逐本核验。{coverNote}</p>
       </aside>
     </article>
   );

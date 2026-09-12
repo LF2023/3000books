@@ -18,7 +18,14 @@ export type BookIndexItem = {
   author: string;
   era: string;
   category: string;
+  cover?: boolean;
 };
+
+export const COVER_BASE = "https://raw.githubusercontent.com/LF2023/3000-books-data/main/covers";
+
+export function coverUrlFor(book: Pick<BookIndexItem, "id" | "slug" | "cover">): string | undefined {
+  return book.cover ? `${COVER_BASE}/${book.id}-${book.slug}.jpg` : undefined;
+}
 
 export type BookMeta = {
   id: string;

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CATEGORIES, getBookIndex, groupByCategory } from "@/lib/books";
+import { CATEGORIES, coverUrlFor, getBookIndex, groupByCategory } from "@/lib/books";
 import { BookCover } from "@/components/BookCover";
 
 export const metadata: Metadata = {
@@ -96,6 +96,7 @@ export default async function BooksPage({
                     <BookCover
                       variant="thumb"
                       title={book.title}
+                      coverUrl={coverUrlFor(book)}
                       className="w-11 shrink-0 border border-rule"
                     />
                     <span className="min-w-0 flex-1 truncate text-lg tracking-[0.08em]">
