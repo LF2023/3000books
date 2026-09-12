@@ -73,58 +73,17 @@ export function SubmissionForm({
   }
 
   const inputClass =
-    "w-full border border-rule bg-transparent px-3 py-2 font-sans text-[0.95rem] text-ink placeholder:text-ink-soft/60 focus:border-ink focus:outline-none";
+    "w-full border border-rule bg-transparent px-3 py-2 font-sans text-[0.95rem] text-ink placeholder:text-ink-soft/70 focus:border-ink focus:outline-none focus:ring-2 focus:ring-seal/40";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {fields.map((field) => (
-        <div key={field.name} className="space-y-2">
-          {field.type === "radio" ? (
-            <p className="font-sans text-sm text-ink-soft">
+      {fields.map((field) =>
+        field.type === "radio" ? (
+          <fieldset key={field.name} className="space-y-2">
+            <legend className="font-sans text-sm text-ink-soft">
               {field.label}
               {field.required ? <span aria-hidden="true" className="ml-1">*</span> : null}
-            </p>
-          ) : (
-            <label
-              htmlFor={field.name}
-              className="block font-sans text-sm text-ink-soft"
-            >
-              {field.label}
-              {field.required ? <span aria-hidden="true" className="ml-1">*</span> : null}
-              {field.help ? (
-                <span className="block text-xs opacity-80">{field.help}</span>
-              ) : null}
-            </label>
-          )}
-
-          {field.type === "textarea" ? (
-            <textarea
-              id={field.name}
-              name={field.name}
-              rows={5}
-              required={field.required}
-              placeholder={field.placeholder}
-              className={inputClass}
-              value={values[field.name] ?? ""}
-              onChange={(e) => set(field.name, e.target.value)}
-            />
-          ) : field.type === "select" ? (
-            <select
-              id={field.name}
-              name={field.name}
-              required={field.required}
-              className={inputClass}
-              value={values[field.name] ?? ""}
-              onChange={(e) => set(field.name, e.target.value)}
-            >
-              <option value="">请选择</option>
-              {field.options?.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          ) : field.type === "radio" ? (
+            </legend>
             <div className="flex flex-wrap gap-x-6 gap-y-2">
               {field.options?.map((option) => (
                 <label
@@ -143,20 +102,62 @@ export function SubmissionForm({
                 </label>
               ))}
             </div>
-          ) : (
-            <input
-              type="text"
-              id={field.name}
-              name={field.name}
-              required={field.required}
-              placeholder={field.placeholder}
-              className={inputClass}
-              value={values[field.name] ?? ""}
-              onChange={(e) => set(field.name, e.target.value)}
-            />
-          )}
-        </div>
-      ))}
+          </fieldset>
+        ) : (
+          <div key={field.name} className="space-y-2">
+            <label
+              htmlFor={field.name}
+              className="block font-sans text-sm text-ink-soft"
+            >
+              {field.label}
+              {field.required ? <span aria-hidden="true" className="ml-1">*</span> : null}
+              {field.help ? (
+                <span className="block text-xs opacity-80">{field.help}</span>
+              ) : null}
+            </label>
+
+            {field.type === "textarea" ? (
+              <textarea
+                id={field.name}
+                name={field.name}
+                rows={5}
+                required={field.required}
+                placeholder={field.placeholder}
+                className={inputClass}
+                value={values[field.name] ?? ""}
+                onChange={(e) => set(field.name, e.target.value)}
+              />
+            ) : field.type === "select" ? (
+              <select
+                id={field.name}
+                name={field.name}
+                required={field.required}
+                className={inputClass}
+                value={values[field.name] ?? ""}
+                onChange={(e) => set(field.name, e.target.value)}
+              >
+                <option value="">请选择</option>
+                {field.options?.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <input
+                type="text"
+                id={field.name}
+                name={field.name}
+                required={field.required}
+                placeholder={field.placeholder}
+                className={inputClass}
+                value={values[field.name] ?? ""}
+                onChange={(e) => set(field.name, e.target.value)}
+              />
+            )}
+          </div>
+        ),
+      )}
 
       <div className="hidden" aria-hidden="true">
         <label>
@@ -181,33 +182,35 @@ export function SubmissionForm({
           {status === "sending" ? "提交中…" : status === "done" ? "已提交" : submitLabel}
         </button>
 
-        {status === "done" ? (
-          <p className="font-sans text-sm leading-relaxed text-ink-soft">
-            {fellBackToMail
-              ? "服务器暂不可用，已改为打开发件箱写信至 admin@3000books.org。"
-              : issueUrl
-                ? "已收到，谢谢。"
-                : "已收到，谢谢。"}
-            {issueUrl ? (
-              <>
-                {" "}
-                <a
-                  href={issueUrl}
-                  className="text-ink underline decoration-rule"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  查看提交记录
-                </a>
-                。
-              </>
-            ) : null}
-          </p>
-        ) : (
-          <p className="font-sans text-xs leading-relaxed text-ink-soft">
-            提交后会以表单形式登记，收到后会有人读。若服务器暂不可用，会自动改为写信。
-          </p>
-        )}
+        <div aria-live="polite">
+          {status === "done" ? (
+            <p className="font-sans text-sm leading-relaxed text-ink-soft">
+              {fellBackToMail
+                ? "服务器暂不可用，已改为打开发件箱写信至 admin@3000books.org。"
+                : issueUrl
+                  ? "已收到，谢谢。"
+                  : "已收到，谢谢。"}
+              {issueUrl ? (
+                <>
+                  {" "}
+                  <a
+                    href={issueUrl}
+                    className="text-ink underline decoration-rule"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    查看提交记录
+                  </a>
+                  。
+                </>
+              ) : null}
+            </p>
+          ) : (
+            <p className="font-sans text-xs leading-relaxed text-ink-soft">
+              提交后会以表单形式登记，收到后会有人读。若服务器暂不可用，会自动改为写信。
+            </p>
+          )}
+        </div>
       </div>
     </form>
   );
