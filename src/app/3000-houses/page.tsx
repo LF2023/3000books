@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 
 export default function ThreeThousandHousesPage() {
   return (
-    <article className="max-w-xl space-y-10">
+    <article className="max-w-xl space-y-12">
       <header className="space-y-4">
-        <p className="font-sans text-xs tracking-[0.28em] text-ink-soft">3000 Houses</p>
-        <h1 className="text-4xl tracking-[0.16em]">3000座书屋</h1>
+        <p className="font-mono text-xs tracking-[0.3em] text-ink-soft">3000 HOUSES · 02</p>
+        <h1 className="text-5xl tracking-[0.14em]">3000座书屋</h1>
       </header>
 
       <div className="space-y-6 text-[1.05rem] leading-[2]">
@@ -26,7 +26,11 @@ export default function ThreeThousandHousesPage() {
           当第一座书屋真正立起来，它会连同地址与来历一起，写在这一页。在那之前，这里保留空白。
         </p>
       </div>
-      <section aria-labelledby="submit-heading" className="max-w-xl space-y-6 border-t border-rule pt-10">
+
+      <section
+        aria-labelledby="submit-heading"
+        className="space-y-6 border border-rule bg-gallery-deep p-6 sm:p-8"
+      >
         <h2 id="submit-heading" className="text-xl tracking-[0.12em]">提供一处书屋线索</h2>
         <SubmissionForm
           subject="书屋线索"

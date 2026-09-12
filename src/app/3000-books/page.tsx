@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 
 export default function ThreeThousandBooksPage() {
   return (
-    <article className="max-w-xl space-y-10">
+    <article className="max-w-xl space-y-12">
       <header className="space-y-4">
-        <p className="font-sans text-xs tracking-[0.28em] text-ink-soft">3000 Books</p>
-        <h1 className="text-4xl tracking-[0.16em]">3000本书籍</h1>
+        <p className="font-mono text-xs tracking-[0.3em] text-ink-soft">3000 BOOKS · 01</p>
+        <h1 className="text-5xl tracking-[0.14em]">3000本书籍</h1>
       </header>
 
       <div className="space-y-6 text-[1.05rem] leading-[2]">
@@ -22,7 +22,7 @@ export default function ThreeThousandBooksPage() {
         </p>
         <p>
           现在的一百本种子，已经放进{" "}
-          <Link href="/books" className="underline decoration-rule">
+          <Link href="/books" className="underline decoration-rule-strong">
             书单
           </Link>
           。此后的每一本，都会先经过挑选，再进入目录；数字增长得慢，也没有关系。
@@ -31,7 +31,11 @@ export default function ThreeThousandBooksPage() {
           书目只作整理与指引。本站不提供全文下载，公版状态亦未逐本核验，这些诚实的保留，是清单的一部分。
         </p>
       </div>
-      <section aria-labelledby="submit-heading" className="max-w-xl space-y-6 border-t border-rule pt-10">
+
+      <section
+        aria-labelledby="submit-heading"
+        className="space-y-6 border border-rule bg-gallery-deep p-6 sm:p-8"
+      >
         <h2 id="submit-heading" className="text-xl tracking-[0.12em]">推荐一本书</h2>
         <SubmissionForm
           subject="书籍推荐"

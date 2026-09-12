@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 
 export default function ThreeThousandStoriesPage() {
   return (
-    <article className="max-w-xl space-y-10">
+    <article className="max-w-xl space-y-12">
       <header className="space-y-4">
-        <p className="font-sans text-xs tracking-[0.28em] text-ink-soft">3000 Stories</p>
-        <h1 className="text-4xl tracking-[0.16em]">3000个故事</h1>
+        <p className="font-mono text-xs tracking-[0.3em] text-ink-soft">3000 STORIES · 03</p>
+        <h1 className="text-5xl tracking-[0.14em]">3000个故事</h1>
       </header>
 
       <div className="space-y-6 text-[1.05rem] leading-[2]">
@@ -24,13 +24,17 @@ export default function ThreeThousandStoriesPage() {
         </p>
         <p>
           在此之前，如果你有一件想先讲的事，可以写信给{" "}
-          <a href="mailto:admin@3000books.org" className="underline decoration-rule">
+          <a href="mailto:admin@3000books.org" className="underline decoration-rule-strong">
             admin@3000books.org
           </a>
           。信会被读到。
         </p>
       </div>
-      <section aria-labelledby="submit-heading" className="max-w-xl space-y-6 border-t border-rule pt-10">
+
+      <section
+        aria-labelledby="submit-heading"
+        className="space-y-6 border border-rule bg-gallery-deep p-6 sm:p-8"
+      >
         <h2 id="submit-heading" className="text-xl tracking-[0.12em]">讲一个故事</h2>
         <SubmissionForm
           subject="我和书籍的故事"

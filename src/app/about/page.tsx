@@ -9,23 +9,23 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <article className="max-w-xl space-y-10">
+    <article className="max-w-xl space-y-12">
       <header className="space-y-4">
-        <p className="font-sans text-xs tracking-[0.28em] text-ink-soft">About</p>
-        <h1 className="text-4xl tracking-[0.16em]">关于</h1>
+        <p className="font-mono text-xs tracking-[0.3em] text-ink-soft">ABOUT</p>
+        <h1 className="text-5xl tracking-[0.14em]">关于</h1>
       </header>
 
       <div className="space-y-6 text-[1.05rem] leading-[2]">
         <p>
           叁仟书屋（3000 Books）是一个安静的非营利文化计划，昵称「3000本书」。站点设在{" "}
-          <a href="https://3000books.org" className="underline decoration-rule">
+          <a href="https://3000books.org" className="underline decoration-rule-strong">
             3000books.org
           </a>
           。
         </p>
         <p>
           我们不把这里做成商店。书目从一百本种子开始，见{" "}
-          <Link href="/books" className="underline decoration-rule">
+          <Link href="/books" className="underline decoration-rule-strong">
             书单
           </Link>
           ；本站不提供全文下载，公版状态也未逐本核验。

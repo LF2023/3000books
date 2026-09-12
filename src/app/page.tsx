@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getBookIndex } from "@/lib/books";
 
 export const metadata: Metadata = {
   title: "叁仟书屋 · 3000 Books",
@@ -23,21 +24,47 @@ const values = [
   },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  let count: number | null = null;
+  try {
+    count = (await getBookIndex()).length;
+  } catch {
+    // 数据仓不可达时降级为静态文案，不让首页挂掉
+  }
+
   return (
-    <article className="space-y-20">
-      <header className="space-y-6">
-        <p className="font-sans text-xs tracking-[0.35em] text-ink-soft uppercase">
-          3000 Books
+    <article className="space-y-24">
+      <header className="space-y-8 border-b border-rule pb-16">
+        <p className="font-mono text-xs tracking-[0.3em] text-ink-soft">
+          3000 BOOKS · NON-PROFIT READING
         </p>
-        <h1 className="text-[2.6rem] leading-none tracking-[0.22em] sm:text-6xl">
+        <h1 className="text-6xl leading-none tracking-[0.16em] sm:text-7xl">
           叁仟书屋
         </h1>
         <p className="max-w-xl text-lg leading-loose text-ink-soft">
           一个安静的非营利文化计划，昵称「3000本书」。
         </p>
-
       </header>
+
+      <section
+        aria-label="站点数据"
+        className="grid grid-cols-3 gap-6 border-y border-rule py-8"
+      >
+        <div>
+          <p className="font-mono text-3xl text-ink sm:text-4xl">
+            {count ?? "—"}
+          </p>
+          <p className="mt-2 font-sans text-xs tracking-[0.2em] text-ink-soft">现存书目</p>
+        </div>
+        <div>
+          <p className="font-mono text-3xl text-ink sm:text-4xl">3000</p>
+          <p className="mt-2 font-sans text-xs tracking-[0.2em] text-ink-soft">最终目标</p>
+        </div>
+        <div>
+          <p className="font-mono text-3xl text-ink sm:text-4xl">0</p>
+          <p className="mt-2 font-sans text-xs tracking-[0.2em] text-ink-soft">全文下载</p>
+        </div>
+      </section>
 
       <section className="max-w-xl space-y-5 text-[1.05rem] leading-[2] text-ink">
         <p>
@@ -49,41 +76,57 @@ export default function HomePage() {
       </section>
 
       <section aria-labelledby="values-heading" className="space-y-8">
-        <h2 id="values-heading" className="font-sans text-xs tracking-[0.28em] text-ink-soft">
+        <h2
+          id="values-heading"
+          className="font-mono text-xs tracking-[0.3em] text-ink-soft"
+        >
           我们看重的三件事
         </h2>
-        <ul className="grid gap-10 sm:grid-cols-3">
-          {values.map((value) => (
-            <li key={value.title} className="space-y-3 border-t border-rule pt-5">
-              <h3 className="text-xl tracking-[0.18em]">{value.title}</h3>
+        <ol className="divide-y divide-rule border-y border-rule">
+          {values.map((value, i) => (
+            <li
+              key={value.title}
+              className="flex flex-col gap-2 py-6 sm:flex-row sm:items-baseline sm:gap-10"
+            >
+              <span aria-hidden="true" className="font-mono text-sm text-seal">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="text-xl tracking-[0.18em] sm:w-40 sm:shrink-0">
+                {value.title}
+              </h3>
               <p className="text-[0.95rem] leading-relaxed text-ink-soft">
                 {value.body}
               </p>
             </li>
           ))}
-        </ul>
+        </ol>
       </section>
 
-      <section className="max-w-xl border-t border-rule pt-10 text-[1.02rem] leading-loose">
-        <h2 className="mb-3 text-xl tracking-[0.12em]">书单</h2>
-        <p className="text-ink-soft">
-          一百本种子已放在{" "}
-          <Link href="/books" className="text-ink underline decoration-rule">
-            书单
+      <section className="grid gap-12 border-t border-rule pt-12 sm:grid-cols-2">
+        <div className="space-y-4">
+          <h2 className="font-mono text-xs tracking-[0.3em] text-ink-soft">书单</h2>
+          <p className="text-[1.02rem] leading-loose text-ink-soft">
+            只列书目，不提供下载。
+          </p>
+          <Link
+            href="/books"
+            className="inline-block text-2xl tracking-[0.14em] text-ink no-underline hover:text-seal"
+          >
+            浏览书单 →
           </Link>
-          。只列书目，不提供下载。
-        </p>
-      </section>
-
-      <section className="max-w-xl border-t border-rule pt-10 text-[1.02rem] leading-loose">
-        <h2 className="mb-3 text-xl tracking-[0.12em]">联络</h2>
-        <p className="text-ink-soft">
-          来信请寄{" "}
-          <a href="mailto:admin@3000books.org" className="text-ink underline decoration-rule">
+        </div>
+        <div className="space-y-4">
+          <h2 className="font-mono text-xs tracking-[0.3em] text-ink-soft">联络</h2>
+          <p className="text-[1.02rem] leading-loose text-ink-soft">
+            来信请寄，信会到达。
+          </p>
+          <a
+            href="mailto:admin@3000books.org"
+            className="inline-block text-2xl tracking-[0.06em] text-ink no-underline hover:text-seal"
+          >
             admin@3000books.org
           </a>
-          。
-        </p>
+        </div>
       </section>
     </article>
   );

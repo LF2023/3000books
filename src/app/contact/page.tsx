@@ -8,10 +8,10 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <article className="max-w-xl space-y-10">
+    <article className="max-w-xl space-y-12">
       <header className="space-y-4">
-        <p className="font-sans text-xs tracking-[0.28em] text-ink-soft">Contact</p>
-        <h1 className="text-4xl tracking-[0.16em]">联络</h1>
+        <p className="font-mono text-xs tracking-[0.3em] text-ink-soft">CONTACT</p>
+        <h1 className="text-5xl tracking-[0.14em]">联络</h1>
       </header>
 
       <div className="space-y-6 text-[1.05rem] leading-[2]">
@@ -19,7 +19,7 @@ export default function ContactPage() {
         <p>
           <a
             href="mailto:admin@3000books.org"
-            className="text-xl tracking-wide text-ink underline decoration-rule"
+            className="text-2xl tracking-[0.06em] text-ink underline decoration-rule-strong hover:text-seal"
           >
             admin@3000books.org
           </a>

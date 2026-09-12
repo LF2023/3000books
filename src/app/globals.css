@@ -1,41 +1,54 @@
 @import "tailwindcss";
 
+/*
+ * 设计系统「白厅朱印」v2（2026-09-12 重设计）
+ * 白厅：纯白底 + 近黑宋体 + 极细灰界线（zen/museum 方向，ui-ux-pro-max 推理引擎生成后人工定稿）
+ * 朱印：朱砂红仅用于交互态（hover / focus / 选中 / 选区）与极少量强调，不参与大面积着色
+ * 档案层：编号、计数、eyebrow 用 mono，做出目录索引感
+ * SOT 详见 design-system/3000books/MASTER.md
+ */
+
 :root {
-  --paper: #f4efe6;
-  --paper-deep: #ebe4d6;
-  --ink: #1f1b16;
-  --ink-soft: #5c554c;
-  --rule: #d4cbb8;
-  --seal: #7a2e2e;
+  --gallery: #ffffff;
+  --gallery-deep: #fafafa;
+  --ink: #18181b;
+  --ink-soft: #52525b;
+  --ink-faint: #a1a1aa; /* 仅限大号装饰字符，不承载信息（对白底约 2.3:1） */
+  --rule: #e4e4e7;
+  --rule-strong: #d4d4d8;
+  --seal: #b3342b; /* 对白底 6.1:1 */
 }
 
 @theme inline {
-  --color-paper: var(--paper);
-  --color-paper-deep: var(--paper-deep);
+  --color-gallery: var(--gallery);
+  --color-gallery-deep: var(--gallery-deep);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
   --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
   --color-seal: var(--seal);
   --font-serif: "Songti SC", "Noto Serif SC", "STSong", "SimSun", "Songti", serif;
   --font-sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, "Courier New", monospace;
 }
 
 html {
-  background: var(--paper);
+  background: var(--gallery);
   color: var(--ink);
 }
 
 body {
   min-height: 100vh;
-  background: var(--paper);
+  background: var(--gallery);
   color: var(--ink);
   font-family: var(--font-serif);
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: #e6d7b8;
-  color: var(--ink);
+  background: var(--seal);
+  color: #ffffff;
 }
 
 a {

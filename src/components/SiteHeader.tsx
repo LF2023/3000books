@@ -9,7 +9,7 @@ const nav = [
 
 export function SiteHeader() {
   return (
-    <header className="border-b border-rule/80">
+    <header className="border-t-2 border-seal border-b border-rule/80">
       <div className="mx-auto flex max-w-3xl items-baseline justify-between gap-6 px-6 py-6 sm:px-8">
         <div className="flex items-baseline gap-4">
           <Link
@@ -18,24 +18,24 @@ export function SiteHeader() {
           >
             叁仟书屋
           </Link>
-          <span className="hidden font-sans text-xs tracking-[0.1em] text-ink-soft sm:inline">
+          <span className="hidden font-mono text-xs tracking-[0.08em] text-ink-soft sm:inline">
             <Link
               href="/3000-books"
-              className="no-underline decoration-rule underline-offset-[0.35em] hover:underline hover:text-ink"
+              className="no-underline hover:text-seal"
             >
               3000本书籍
             </Link>
-            <span aria-hidden="true" className="mx-2">·</span>
+            <span aria-hidden="true" className="mx-2 text-rule-strong">/</span>
             <Link
               href="/3000-houses"
-              className="no-underline decoration-rule underline-offset-[0.35em] hover:underline hover:text-ink"
+              className="no-underline hover:text-seal"
             >
               3000座书屋
             </Link>
-            <span aria-hidden="true" className="mx-2">·</span>
+            <span aria-hidden="true" className="mx-2 text-rule-strong">/</span>
             <Link
               href="/3000-stories"
-              className="no-underline decoration-rule underline-offset-[0.35em] hover:underline hover:text-ink"
+              className="no-underline hover:text-seal"
             >
               3000个故事
             </Link>
@@ -46,7 +46,7 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="no-underline decoration-rule underline-offset-[0.35em] hover:underline hover:text-ink"
+              className="no-underline decoration-rule-strong underline-offset-[0.35em] hover:text-seal hover:underline"
             >
               {item.label}
             </Link>
