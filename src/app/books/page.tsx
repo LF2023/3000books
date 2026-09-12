@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CATEGORIES, getBookIndex, groupByCategory } from "@/lib/books";
+import { BookCover } from "@/components/BookCover";
 
 export const metadata: Metadata = {
   title: "书单",
@@ -84,7 +85,7 @@ export default async function BooksPage({
                 <li key={book.id}>
                   <Link
                     href={`/books/${book.slug}`}
-                    className="flex flex-col gap-1 py-4 no-underline hover:text-seal sm:flex-row sm:items-baseline sm:gap-6"
+                    className="flex items-center gap-4 py-3 no-underline hover:text-seal sm:gap-5"
                   >
                     <span
                       aria-hidden="true"
@@ -92,10 +93,15 @@ export default async function BooksPage({
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="flex-1 text-lg tracking-[0.08em]">
+                    <BookCover
+                      variant="thumb"
+                      title={book.title}
+                      className="w-11 shrink-0 border border-rule"
+                    />
+                    <span className="min-w-0 flex-1 truncate text-lg tracking-[0.08em]">
                       {book.title}
                     </span>
-                    <span className="font-sans text-sm text-ink-soft">
+                    <span className="hidden shrink-0 font-sans text-sm text-ink-soft sm:block">
                       {book.author}
                       <span aria-hidden="true" className="mx-2 text-rule-strong">·</span>
                       {book.era}

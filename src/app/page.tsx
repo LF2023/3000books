@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getBookIndex } from "@/lib/books";
+import { CountUp } from "@/components/CountUp";
+import { Reveal } from "@/components/Reveal";
+import { Stamp } from "@/components/Stamp";
 
 export const metadata: Metadata = {
   title: "叁仟书屋 · 3000 Books",
@@ -34,30 +37,42 @@ export default async function HomePage() {
 
   return (
     <article className="space-y-24">
-      <header className="space-y-8 border-b border-rule pb-16">
-        <p className="font-mono text-xs tracking-[0.3em] text-ink-soft">
+      <header className="relative space-y-8 border-b border-rule pb-16">
+        <div className="absolute right-0 top-2 hidden sm:block">
+          <Stamp className="stamp-in stamp-rest h-16 w-16" />
+        </div>
+        <p className="rise font-mono text-xs tracking-[0.3em] text-ink-soft" style={{ animationDelay: "0.05s" }}>
           3000 BOOKS · NON-PROFIT READING
         </p>
-        <h1 className="text-6xl leading-none tracking-[0.16em] sm:text-7xl">
+        <h1
+          className="rise text-6xl leading-none tracking-[0.16em] sm:text-7xl"
+          style={{ animationDelay: "0.15s" }}
+        >
           叁仟书屋
         </h1>
-        <p className="max-w-xl text-lg leading-loose text-ink-soft">
+        <p
+          className="rise max-w-xl text-lg leading-loose text-ink-soft"
+          style={{ animationDelay: "0.28s" }}
+        >
           一个安静的非营利文化计划，昵称「3000本书」。
         </p>
       </header>
 
       <section
         aria-label="站点数据"
-        className="grid grid-cols-3 gap-6 border-y border-rule py-8"
+        className="rise grid grid-cols-3 gap-6 border-y border-rule py-8"
+        style={{ animationDelay: "0.4s" }}
       >
         <div>
           <p className="font-mono text-3xl text-ink sm:text-4xl">
-            {count ?? "—"}
+            {count === null ? "—" : <CountUp to={count} />}
           </p>
           <p className="mt-2 font-sans text-xs tracking-[0.2em] text-ink-soft">现存书目</p>
         </div>
         <div>
-          <p className="font-mono text-3xl text-ink sm:text-4xl">3000</p>
+          <p className="font-mono text-3xl text-ink sm:text-4xl">
+            <CountUp to={3000} duration={1600} />
+          </p>
           <p className="mt-2 font-sans text-xs tracking-[0.2em] text-ink-soft">最终目标</p>
         </div>
         <div>
@@ -75,59 +90,63 @@ export default async function HomePage() {
         </p>
       </section>
 
-      <section aria-labelledby="values-heading" className="space-y-8">
-        <h2
-          id="values-heading"
-          className="font-mono text-xs tracking-[0.3em] text-ink-soft"
-        >
-          我们看重的三件事
-        </h2>
-        <ol className="divide-y divide-rule border-y border-rule">
-          {values.map((value, i) => (
-            <li
-              key={value.title}
-              className="flex flex-col gap-2 py-6 sm:flex-row sm:items-baseline sm:gap-10"
-            >
-              <span aria-hidden="true" className="font-mono text-sm text-seal">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="text-xl tracking-[0.18em] sm:w-40 sm:shrink-0">
-                {value.title}
-              </h3>
-              <p className="text-[0.95rem] leading-relaxed text-ink-soft">
-                {value.body}
-              </p>
-            </li>
-          ))}
-        </ol>
-      </section>
+      <Reveal>
+        <section aria-labelledby="values-heading" className="space-y-8">
+          <h2
+            id="values-heading"
+            className="font-mono text-xs tracking-[0.3em] text-ink-soft"
+          >
+            我们看重的三件事
+          </h2>
+          <ol className="divide-y divide-rule border-y border-rule">
+            {values.map((value, i) => (
+              <li
+                key={value.title}
+                className="flex flex-col gap-2 py-6 sm:flex-row sm:items-baseline sm:gap-10"
+              >
+                <span aria-hidden="true" className="font-mono text-sm text-seal">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-xl tracking-[0.18em] sm:w-40 sm:shrink-0">
+                  {value.title}
+                </h3>
+                <p className="text-[0.95rem] leading-relaxed text-ink-soft">
+                  {value.body}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      </Reveal>
 
-      <section className="grid gap-12 border-t border-rule pt-12 sm:grid-cols-2">
-        <div className="space-y-4">
-          <h2 className="font-mono text-xs tracking-[0.3em] text-ink-soft">书单</h2>
-          <p className="text-[1.02rem] leading-loose text-ink-soft">
-            只列书目，不提供下载。
-          </p>
-          <Link
-            href="/books"
-            className="inline-block text-2xl tracking-[0.14em] text-ink no-underline hover:text-seal"
-          >
-            浏览书单 →
-          </Link>
-        </div>
-        <div className="space-y-4">
-          <h2 className="font-mono text-xs tracking-[0.3em] text-ink-soft">联络</h2>
-          <p className="text-[1.02rem] leading-loose text-ink-soft">
-            来信请寄，信会到达。
-          </p>
-          <a
-            href="mailto:admin@3000books.org"
-            className="inline-block text-2xl tracking-[0.06em] text-ink no-underline hover:text-seal"
-          >
-            admin@3000books.org
-          </a>
-        </div>
-      </section>
+      <Reveal>
+        <section className="grid gap-12 border-t border-rule pt-12 sm:grid-cols-2">
+          <div className="space-y-4">
+            <h2 className="font-mono text-xs tracking-[0.3em] text-ink-soft">书单</h2>
+            <p className="text-[1.02rem] leading-loose text-ink-soft">
+              只列书目，不提供下载。
+            </p>
+            <Link
+              href="/books"
+              className="inline-block text-2xl tracking-[0.14em] text-ink no-underline hover:text-seal"
+            >
+              浏览书单 →
+            </Link>
+          </div>
+          <div className="space-y-4">
+            <h2 className="font-mono text-xs tracking-[0.3em] text-ink-soft">联络</h2>
+            <p className="text-[1.02rem] leading-loose text-ink-soft">
+              来信请寄，信会到达。
+            </p>
+            <a
+              href="mailto:admin@3000books.org"
+              className="inline-block text-2xl tracking-[0.06em] text-ink no-underline hover:text-seal"
+            >
+              admin@3000books.org
+            </a>
+          </div>
+        </section>
+      </Reveal>
     </article>
   );
 }

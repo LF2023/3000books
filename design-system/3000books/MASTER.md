@@ -75,14 +75,33 @@
 ### 书目详情（展签式）
 大标题 → mono 作者/年代行（底部界线）→ 一句话 → tag 方章（`border-rule-strong`）→ mono rights 行（语言/版权/不提供全文）。
 
-## Motion（不适用）
+## Motion v2.1（2026-09-12 用户授权解禁）
 
-全站刻意零动效：无 transition/transform/GSAP，hover 为瞬时颜色变化。天然满足 `prefers-reduced-motion`。**不要添加任何动画。**
+零动效原则终止,改为**白名单制**——只允许下表特效,全部尊重 `prefers-reduced-motion`,实现位于 `globals.css` 与 `Reveal/CountUp/Stamp` 组件:
+
+| 特效 | 实现 | 用法与边界 |
+|---|---|---|
+| rise 入场 | CSS `.rise` + `animationDelay` | 首屏元素递进 0.05-0.4s,无 JS 依赖 |
+| 盖章 | `.stamp-in` `.stamp-rest` | 仅 Stamp 印章,一次性 |
+| 滚动渐显 | `<Reveal>`(IntersectionObserver) | 仅首屏以外区块;SSR/无 JS 时始终可见 |
+| 数字滚动 | `<CountUp>` | 数据带计数;SSR 输出终值,reduced-motion 直显 |
+| hover 色彩过渡 | `a, button` transition 0.18s | 仅颜色,不加 transform |
+
+仍禁止:hover 位移(transform)、视差、marquee、位移 >16px、时长 >1s 的入场、GSAP 等第三方动画库。
+
+### BookCover(程序生成书衣,v2.1 新增)
+
+`src/components/BookCover.tsx`——每本书一张纯 SVG 排印封面:双线框、mono 类目、竖排书名(逐字 tspan,超长自动缩字号/换列/截断)、mono 作者、朱砂小印「書」。
+
+- `variant="thumb"`(80×120,书单列表行)/ `variant="full"`(300×450,详情页两栏)
+- 书名 `fill=currentColor`,随所在行 hover 一起转朱砂
+- **不得改为位图或外链封面**:真实书封有版权问题,中文经典在 Open Library 几乎无覆盖,且违反站点自持约束
+- 详情页 rights 行必须保留声明「书衣为站内排印生成，非原书装帧」
 
 ## Anti-Patterns (Do NOT Use)
 
 - ❌ 投影、圆角（>2px）、渐变、emoji 图标
-- ❌ transform 动画 / 滚动特效
+- ❌ 白名单外的任何动画（hover 位移、视差、marquee、第三方动画库）
 - ❌ 大面积彩色（朱砂只做点睛）
 - ❌ 无语义的彩色文本（seal 只用于交互态与编号）
 - ❌ `--ink-faint` 承载可读信息（仅装饰）

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SubmissionForm } from "@/components/SubmissionForm";
+import { Reveal } from "@/components/Reveal";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -32,11 +33,12 @@ export default function ThreeThousandBooksPage() {
         </p>
       </div>
 
-      <section
-        aria-labelledby="submit-heading"
-        className="space-y-6 border border-rule bg-gallery-deep p-6 sm:p-8"
-      >
-        <h2 id="submit-heading" className="text-xl tracking-[0.12em]">推荐一本书</h2>
+      <Reveal>
+        <section
+          aria-labelledby="submit-heading"
+          className="space-y-6 border border-rule bg-gallery-deep p-6 sm:p-8"
+        >
+          <h2 id="submit-heading" className="text-xl tracking-[0.12em]">推荐一本书</h2>
         <SubmissionForm
           subject="书籍推荐"
           submitLabel="推荐"
@@ -54,8 +56,9 @@ export default function ThreeThousandBooksPage() {
             { name: "caller", label: "你的称呼", help: "可选，仅用于回信" },
             { name: "contact", label: "联系方式", help: "可选，邮箱即可" },
           ]}
-        />
-      </section>
+          />
+        </section>
+      </Reveal>
     </article>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SubmissionForm } from "@/components/SubmissionForm";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "3000个故事",
@@ -31,11 +32,12 @@ export default function ThreeThousandStoriesPage() {
         </p>
       </div>
 
-      <section
-        aria-labelledby="submit-heading"
-        className="space-y-6 border border-rule bg-gallery-deep p-6 sm:p-8"
-      >
-        <h2 id="submit-heading" className="text-xl tracking-[0.12em]">讲一个故事</h2>
+      <Reveal>
+        <section
+          aria-labelledby="submit-heading"
+          className="space-y-6 border border-rule bg-gallery-deep p-6 sm:p-8"
+        >
+          <h2 id="submit-heading" className="text-xl tracking-[0.12em]">讲一个故事</h2>
         <SubmissionForm
           subject="我和书籍的故事"
           submitLabel="讲给书屋"
@@ -58,7 +60,8 @@ export default function ThreeThousandStoriesPage() {
             },
           ]}
         />
-      </section>
+        </section>
+      </Reveal>
     </article>
   );
 }

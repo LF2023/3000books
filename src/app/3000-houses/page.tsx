@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SubmissionForm } from "@/components/SubmissionForm";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "3000座书屋",
@@ -27,11 +28,12 @@ export default function ThreeThousandHousesPage() {
         </p>
       </div>
 
-      <section
-        aria-labelledby="submit-heading"
-        className="space-y-6 border border-rule bg-gallery-deep p-6 sm:p-8"
-      >
-        <h2 id="submit-heading" className="text-xl tracking-[0.12em]">提供一处书屋线索</h2>
+      <Reveal>
+        <section
+          aria-labelledby="submit-heading"
+          className="space-y-6 border border-rule bg-gallery-deep p-6 sm:p-8"
+        >
+          <h2 id="submit-heading" className="text-xl tracking-[0.12em]">提供一处书屋线索</h2>
         <SubmissionForm
           subject="书屋线索"
           submitLabel="提交线索"
@@ -54,7 +56,8 @@ export default function ThreeThousandHousesPage() {
             { name: "notes", label: "补充说明", type: "textarea", placeholder: "任何值得知道的细节" },
           ]}
         />
-      </section>
+        </section>
+      </Reveal>
     </article>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getBookIndex, getBookMeta } from "@/lib/books";
+import { BookCover } from "@/components/BookCover";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -39,8 +40,8 @@ export default async function BookPage({ params }: PageProps) {
   const rightsLabel = meta.rights.status === "public_domain" ? "公版" : "未核验";
 
   return (
-    <article className="max-w-xl space-y-12">
-      <p className="font-mono text-sm text-ink-soft">
+    <article className="max-w-3xl space-y-10">
+      <p className="rise font-mono text-sm text-ink-soft">
         <Link href="/books" className="no-underline hover:text-seal">
           书单
         </Link>
@@ -48,28 +49,44 @@ export default async function BookPage({ params }: PageProps) {
         {meta.category}
       </p>
 
-      <header className="space-y-6 border-b border-rule pb-10">
-        <h1 className="text-5xl leading-tight tracking-[0.1em]">{meta.title}</h1>
-        <p className="font-mono text-sm tracking-wide text-ink-soft">
-          {meta.author.name}
-          <span aria-hidden="true" className="mx-2 text-rule-strong">·</span>
-          {meta.author.era}
-        </p>
-      </header>
+      <div className="rise flex flex-col gap-10 sm:flex-row sm:gap-12" style={{ animationDelay: "0.1s" }}>
+        <div className="mx-auto w-48 shrink-0 border border-rule sm:mx-0 sm:w-56">
+          <BookCover
+            variant="full"
+            title={meta.title}
+            category={meta.category}
+            author={meta.author.name}
+          />
+        </div>
 
-      <p className="text-[1.08rem] leading-[2]">{meta.oneSentenceSummary}</p>
+        <div className="min-w-0 flex-1 space-y-6">
+          <header className="space-y-4 border-b border-rule pb-8">
+            <h1 className="text-4xl leading-snug tracking-[0.08em]">{meta.title}</h1>
+            <p className="font-mono text-sm tracking-wide text-ink-soft">
+              {meta.author.name}
+              <span aria-hidden="true" className="mx-2 text-rule-strong">·</span>
+              {meta.author.era}
+            </p>
+          </header>
 
-      {meta.tags.length > 0 ? (
-        <ul className="flex flex-wrap gap-2 font-sans text-xs tracking-wide text-ink-soft">
-          {meta.tags.map((tag) => (
-            <li key={tag} className="border border-rule-strong px-2 py-1">
-              {tag}
-            </li>
-          ))}
-        </ul>
-      ) : null}
+          <p className="text-[1.05rem] leading-[2]">{meta.oneSentenceSummary}</p>
 
-      <aside className="space-y-2 border-t border-rule pt-8 text-[0.95rem] leading-loose text-ink-soft">
+          {meta.tags.length > 0 ? (
+            <ul className="flex flex-wrap gap-2 font-sans text-xs tracking-wide text-ink-soft">
+              {meta.tags.map((tag) => (
+                <li key={tag} className="border border-rule-strong px-2 py-1">
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
+      </div>
+
+      <aside
+        className="rise space-y-2 border-t border-rule pt-8 text-[0.95rem] leading-loose text-ink-soft"
+        style={{ animationDelay: "0.2s" }}
+      >
         <p className="font-mono text-xs tracking-[0.15em]">
           语言 {meta.language}
           <span aria-hidden="true" className="mx-2 text-rule-strong">·</span>
@@ -77,7 +94,7 @@ export default async function BookPage({ params }: PageProps) {
           <span aria-hidden="true" className="mx-2 text-rule-strong">·</span>
           不提供全文
         </p>
-        <p>本站暂不提供全文下载。公版状态未逐本核验。</p>
+        <p>本站暂不提供全文下载。公版状态未逐本核验。页面书衣为站内排印生成，非原书装帧。</p>
       </aside>
     </article>
   );
